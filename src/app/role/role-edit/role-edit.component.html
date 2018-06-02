@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmitClick(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-xs-8 form-group">
+          <label for="name">Name</label>
+          <input type="text"
+                 name="name"
+                 ngModel id="name"
+                 class="form-control"
+                 required>
+          <span class="help-block" *ngIf="">Please enter a name!</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success"
+                  style="margin-right: 5px;"
+                  type="submit"
+                  [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+          <button *ngIf="editMode" class="btn btn-danger" style="margin-right: 5px;" type="button" (click)="onDelete()">Delete</button>
+          <button class="btn btn-primary" style="margin-right: 5px;" type="button" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,57 @@
+<h3>Manage Role-University mapping</h3>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-success">Map</button>
+        <hr/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="dropdown">
+          <div class="btn-group" appDropdown>
+            <button
+              type="button"
+              class="btn btn-primary dropdown-toggle">
+              Select University<span class="caret" style="margin-left: 20px"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li style="cursor: pointer"
+                  *ngFor="let university of universities">
+                <a (click)="onUniversitySelected(university)">
+                  {{ university.name }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8">
+        <h5 *ngIf="universitySelected">Selected University: {{ university.name }}</h5>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="dropdown">
+          <div class="btn-group" appDropdown>
+            <button
+              type="button"
+              class="btn btn-primary dropdown-toggle"
+              style="width: 156px;">
+              Select Roles  <span class="caret" style="margin-left: 40px"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li style="cursor: pointer" *ngFor="let role of roles"><a (click)="onRoleSelected(role)">{{ role.name }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8">
+        <h5 *ngIf="roleSelected">Selected Role: {{ role.name }}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
