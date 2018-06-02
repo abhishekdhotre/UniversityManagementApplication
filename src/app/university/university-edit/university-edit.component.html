@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup] ="universityForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success"
+                  type="submit"
+                  [disabled]="!universityForm.valid"
+                  style="margin-right: 5px">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" formControlName="name">
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="imagePath">Image Path</label>
+          <input type="text" id="imagePath" class="form-control" formControlName="imagePath"
+                 #imagePath>
+        </div>
+      </div>
+      <br/>
+      <div class="row" style="margin-top: 10px">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value"
+               class="img-responsive"
+               style="max-width: 150px; max-height: 150px;">
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="description">Description</label>
+          <textarea type="text" id="description" class="form-control" rows="6" formControlName="description" ></textarea>
+        </div>
+      </div>
+      <br/>
+      <div class="row" style="margin-top: 20px">
+        <div class="col-xs-12" formArrayName="schools">
+          <label>Schools</label>
+          <div class="row"
+               *ngFor="let school_control of universityForm.get('schools').controls; let i = index"
+               [formGroupName]="i" style="margin-top: 10px;">
+              <div class="col-xs-8" style="display: none">
+                <input type="text" formControlName="id" class="form-control" #schoolId>
+              </div>
+              <div class="col-xs-8">
+                <input type="text" formControlName="name" class="form-control">
+              </div>
+              <button class="btn btn-primary" *ngIf="schoolId.value > 0" (click)="onManageSchools(schoolId.value)">Manage</button>
+              <button class="btn btn-danger" (click)="onSchoolDelete(i)">X</button>
+            </div>
+          </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-xs-12">
+          <button style="margin-top: 5px"
+                  type="button"
+                  class="btn btn-success"
+                  (click)="onAddSchool()">Add School</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

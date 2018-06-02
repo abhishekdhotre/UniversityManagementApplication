@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup] ="schoolForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success"
+                  type="submit"
+                  [disabled]="!schoolForm.valid"
+                  style="margin-right: 5px">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <hr/>
+      <div class="row" style="margin-top: 20px">
+        <div class="col-xs-12" formArrayName="departments">
+          <label>{{ Name }}</label>
+          <div class="row"
+               *ngFor="let school_control of schoolForm.get('departments').controls; let i = index"
+               [formGroupName]="i" style="margin-top: 10px;">
+            <div class="col-xs-8" style="display: none">
+              <input type="text" formControlName="id" class="form-control" #departmentId>
+            </div>
+            <div class="col-xs-8">
+              <input type="text" formControlName="name" class="form-control">
+            </div>
+            <button class="btn btn-danger" (click)="onDepartmentDelete(i)">X</button>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-xs-12">
+          <button style="margin-top: 5px"
+                  type="button"
+                  class="btn btn-warning" (click)="onAddDepartment()">Add Department</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

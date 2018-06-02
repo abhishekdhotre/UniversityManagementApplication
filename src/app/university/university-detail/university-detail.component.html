@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-xs-3">
+    <img src="{{ university.imagePath }}" alt="" class="img-responsive" style="max-height: 150px; max-width: 150px">
+  </div>
+  <div class="col-xs-8">
+    <h1>{{ university.name }}</h1>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="btn-group" appDropdown>
+      <button
+        type="button"
+        class="btn btn-primary dropdown-toggle">
+        Manage University <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li style="cursor: pointer"><a (click)="onEditUniversity()">Edit University</a></li>
+        <li style="cursor: pointer"><a (click)="onDeleteUniversity(university)">Delete University</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-xs-12">
+    {{ university.description }}
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="list-group">
+      <li class="list-group-item"
+          *ngFor="let s of university.schools; let i = index;">
+        {{ s.name }}
+        <ul class="list-group">
+          <li class="list-group-item"
+              *ngFor="let d of university.schools[i].departments">
+              {{ d.name }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

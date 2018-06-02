@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewUniversity()">New University</button>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-xs-12">
+    <app-university-item
+      *ngFor="let u of universities;"
+      [university]="u" [index]="u.id">
+    </app-university-item>
+  </div>
+</div>
