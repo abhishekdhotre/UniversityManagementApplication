@@ -1,15 +1,15 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {UniversityService} from '../university/university.service';
 import {Injectable} from '@angular/core';
 import {UniversityModel} from '../university/university.model';
-import {Subject} from 'rxjs';
 import {SchoolModel} from '../university/school.model';
+import {RoleModel} from '../role/role.model';
 
 @Injectable()
 export class DataStorageService {
 
   constructor(private httpClient: HttpClient) {  }
 
+  // University, School and Department
   getUniversities() {
     return this.httpClient.get<UniversityModel[]>('http://localhost:53447/api/university');
   }
@@ -39,5 +39,31 @@ export class DataStorageService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.httpClient.put('http://localhost:53447/api/school/' + schoolId
       , schoolModel, { headers });
+  }
+
+  // Roles and Users
+  getRoles() {
+    return this.httpClient.get<RoleModel[]>('http://localhost:53447/api/role');
+  }
+
+  getRole(i) {
+    return this.httpClient.get<RoleModel>('http://localhost:53447/api/role/' + i);
+  }
+
+  addRole(roleModel: RoleModel) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.httpClient.post('http://localhost:53447/api/role'
+      , roleModel, { headers });
+  }
+
+  updateRole(index: number, roleModel: RoleModel) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.httpClient.put('http://localhost:53447/api/role/' + index
+      , roleModel, { headers });
+  }
+
+  deleteRole(i) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.httpClient.delete('http://localhost:53447/api/role/' + i, { headers });
   }
 }

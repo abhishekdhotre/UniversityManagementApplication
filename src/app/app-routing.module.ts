@@ -5,6 +5,7 @@ import {UniversityDetailComponent} from './university/university-detail/universi
 import {UniversityEditComponent} from './university/university-edit/university-edit.component';
 import {UniversityStartComponent} from './university/university-start/university-start.component';
 import {SchoolEditComponent} from './university/school-edit/school-edit.component';
+import {RoleComponent} from './role/role.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/university', pathMatch: 'full' },
@@ -15,7 +16,11 @@ const routes: Routes = [
       { path: ':id/edit', component: UniversityEditComponent },
       { path: ':id/edit/:schoolId/school', component: SchoolEditComponent },
       ]
-  }];
+  },
+  { path: 'role', component: RoleComponent, children: [
+      { path: ':id', component: RoleComponent },
+    ] }
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
