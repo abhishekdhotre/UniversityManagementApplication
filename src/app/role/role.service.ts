@@ -2,14 +2,18 @@ import {RoleModel} from './role.model';
 import {Subject} from 'rxjs';
 import {DataStorageService} from '../shared/data-storage.service';
 import {Injectable} from '@angular/core';
+import {UniversityRoleModel} from '../university-role.model';
+import {UniversityRoleDtoModel} from '../university-role-dto.model';
 
 @Injectable()
 export class RoleService {
   roleUpdated = new Subject<RoleModel[]>();
+  universityRoleMappingUpdated = new Subject<UniversityRoleDtoModel[]>();
   startedEditing = new Subject<number>();
   constructor(private dataStorageService: DataStorageService) { }
 
   private roles: RoleModel[];
+  private universityRoleMapping: UniversityRoleDtoModel[];
 
   getRoles() {
     this.dataStorageService.getRoles()
@@ -40,6 +44,7 @@ export class RoleService {
     return this.dataStorageService.updateRole(index, roleModel).subscribe(
       (response) => {
         this.getRoles();
+        this.getUniversityRolesMapping();
       });
   }
 
@@ -57,5 +62,30 @@ export class RoleService {
 
   updateRoleList() {
     this.roleUpdated.next(this.roles.slice());
+  }
+
+  addUniversityRoleMapping(universityRole: UniversityRoleModel) {
+    return this.dataStorageService.addUniversityRole(universityRole).subscribe(
+      (response) => {
+        this.getUniversityRolesMapping();
+      });
+  }
+
+  getSingleUniversityRoleMapping(universityRole: UniversityRoleModel) {
+    return this.dataStorageService.getSingleUniversityRoleMapping(universityRole);
+  }
+
+  getUniversityRolesMapping() {
+    this.dataStorageService.getUniversityRoleMapping()
+      .subscribe(
+        (universityRoleDto: UniversityRoleDtoModel[]) => {
+          this.universityRoleMapping = universityRoleDto;
+          this.updateUniversityRoleMapping();
+        }
+      );
+  }
+
+  updateUniversityRoleMapping() {
+    this.universityRoleMappingUpdated.next(this.universityRoleMapping.slice());
   }
 }

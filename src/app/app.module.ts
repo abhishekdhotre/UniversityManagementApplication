@@ -23,6 +23,8 @@ import { RoleListComponent } from './role/role-list/role-list.component';
 import { RoleManageComponent } from './role/role-manage/role-manage.component';
 import { UserComponent } from './user/user.component';
 import {RoleService} from './role/role.service';
+import { RoleMappingListComponent } from './role/role-mapping-list/role-mapping-list.component';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -41,13 +43,15 @@ import {RoleService} from './role/role.service';
     RoleListComponent,
     RoleManageComponent,
     UserComponent,
+    RoleMappingListComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2SmartTableModule,
   ],
   providers: [UniversityService, DataStorageService, RoleService],
   bootstrap: [AppComponent]

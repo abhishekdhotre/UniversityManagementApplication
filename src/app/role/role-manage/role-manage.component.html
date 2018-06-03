@@ -3,10 +3,11 @@
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-success">Map</button>
-        <hr/>
+        <button [disabled]="!formValid" class="btn btn-success" (click)="onMapClick()">Map</button>
       </div>
     </div>
+    <label *ngIf="alreadyMapped" class="control-label" style="color: red;">Role already mapped.</label>
+    <br/>
     <div class="row">
       <div class="col-xs-4">
         <div class="dropdown">

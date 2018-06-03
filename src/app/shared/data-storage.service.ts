@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {UniversityModel} from '../university/university.model';
 import {SchoolModel} from '../university/school.model';
 import {RoleModel} from '../role/role.model';
+import {UniversityRoleModel} from '../university-role.model';
+import {UniversityRoleDtoModel} from '../university-role-dto.model';
 
 @Injectable()
 export class DataStorageService {
@@ -65,5 +67,20 @@ export class DataStorageService {
   deleteRole(i) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.httpClient.delete('http://localhost:53447/api/role/' + i, { headers });
+  }
+
+  addUniversityRole(universityRoleModel: UniversityRoleModel) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.httpClient.post('http://localhost:53447/api/universityrole'
+      , universityRoleModel, { headers });
+  }
+
+  getUniversityRoleMapping() {
+    return this.httpClient.get<UniversityRoleDtoModel[]>('http://localhost:53447/api/universityrole');
+  }
+
+  getSingleUniversityRoleMapping(universityRoleModel: UniversityRoleModel) {
+    return this.httpClient.get<UniversityRoleModel>('http://localhost:53447/api/universityrole/'
+      + universityRoleModel.universityId + '/' + universityRoleModel.roleId);
   }
 }

@@ -4,6 +4,8 @@ import {RoleService} from '../role.service';
 import {Subscription} from 'rxjs';
 import {UniversityService} from '../../university/university.service';
 import {UniversityModel} from '../../university/university.model';
+import {UniversityRoleModel} from '../../university-role.model';
+import {UniversityRoleDtoModel} from '../../university-role-dto.model';
 
 @Component({
   selector: 'app-role-manage',
@@ -19,6 +21,8 @@ export class RoleManageComponent implements OnInit {
   role: RoleModel;
   universitySelected = false;
   roleSelected = false;
+  formValid = false;
+  alreadyMapped = false;
   constructor(private roleService: RoleService,
               private universityService: UniversityService) { }
 
@@ -41,10 +45,37 @@ export class RoleManageComponent implements OnInit {
   onUniversitySelected(university: UniversityModel) {
     this.universitySelected = true;
     this.university = university;
+    if (this.role != null && this.university != null) {
+      this.formValid = true;
+    }
   }
 
   onRoleSelected(role: RoleModel) {
     this.roleSelected = true;
     this.role = role;
+    if (this.role != null && this.university != null) {
+      this.formValid = true;
+    }
+  }
+
+  onMapClick() {
+    if (this.role != null && this.university != null) {
+      const UniversityRole = new UniversityRoleModel(this.university.id, this.role.id);
+      try {
+        this.roleService.getSingleUniversityRoleMapping(new UniversityRoleModel(this.university.id, this.role.id)).subscribe(
+          (universityRoleModel: UniversityRoleModel) => {
+            if (universityRoleModel.universityId !== 0) {
+              this.alreadyMapped = true;
+            } else {
+              console.log('in else');
+              this.alreadyMapped = false;
+              this.roleService.addUniversityRoleMapping(UniversityRole);
+            }
+          }
+        );
+      } catch (Exception) {
+        console.log('caught exception');
+      }
+    }
   }
 }
