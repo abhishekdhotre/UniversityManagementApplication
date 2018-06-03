@@ -25,6 +25,10 @@ import { UserComponent } from './user/user.component';
 import {RoleService} from './role/role.service';
 import { RoleMappingListComponent } from './role/role-mapping-list/role-mapping-list.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserManageComponent } from './user/user-manage/user-manage.component';
+import { UserMappingListComponent } from './user/user-mapping-list/user-mapping-list.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,10 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     RoleManageComponent,
     UserComponent,
     RoleMappingListComponent,
+    UserEditComponent,
+    UserListComponent,
+    UserManageComponent,
+    UserMappingListComponent,
   ],
   imports: [
     BrowserModule,
