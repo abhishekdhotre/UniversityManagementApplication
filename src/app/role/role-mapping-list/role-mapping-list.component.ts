@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LocalDataSource, Ng2SmartTableModule} from 'ng2-smart-table';
 import {RoleService} from '../role.service';
 import {Subscription} from 'rxjs';
-import {UniversityRoleDtoModel} from '../../university-role-dto.model';
+import {UniversityRoleDtoModel} from '../../shared/university-role-dto.model';
 
 @Component({
   selector: 'app-role-mapping-list',

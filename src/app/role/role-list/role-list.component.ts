@@ -24,10 +24,6 @@ export class RoleListComponent implements OnInit, OnDestroy {
     this.roleService.getRoles();
   }
 
-  onNewIngredientAdded(role: RoleModel) {
-    this.roleService.addRole(role);
-  }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

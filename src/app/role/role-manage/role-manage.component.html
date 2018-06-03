@@ -4,9 +4,11 @@
     <div class="row">
       <div class="col-xs-12">
         <button [disabled]="!formValid" class="btn btn-success" (click)="onMapClick()">Map</button>
+        <button [disabled]="!formValid" class="btn btn-danger" style="margin-right: 5px;" (click)="onDeleteClick()">Delete</button>
       </div>
     </div>
     <label *ngIf="alreadyMapped" class="control-label" style="color: red;">Role already mapped.</label>
+    <label *ngIf="!allowDelete" class="control-label" style="color: red;">Role not mapped with University.</label>
     <br/>
     <div class="row">
       <div class="col-xs-4">

@@ -2,8 +2,8 @@ import {RoleModel} from './role.model';
 import {Subject} from 'rxjs';
 import {DataStorageService} from '../shared/data-storage.service';
 import {Injectable} from '@angular/core';
-import {UniversityRoleModel} from '../university-role.model';
-import {UniversityRoleDtoModel} from '../university-role-dto.model';
+import {UniversityRoleModel} from '../shared/university-role.model';
+import {UniversityRoleDtoModel} from '../shared/university-role-dto.model';
 
 @Injectable()
 export class RoleService {
@@ -66,6 +66,13 @@ export class RoleService {
 
   addUniversityRoleMapping(universityRole: UniversityRoleModel) {
     return this.dataStorageService.addUniversityRole(universityRole).subscribe(
+      (response) => {
+        this.getUniversityRolesMapping();
+      });
+  }
+
+  deleteUniversityRoleMapping(universityRole: UniversityRoleModel) {
+    return this.dataStorageService.deleteUniversityRole(universityRole).subscribe(
       (response) => {
         this.getUniversityRolesMapping();
       });

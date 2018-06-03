@@ -29,6 +29,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserManageComponent } from './user/user-manage/user-manage.component';
 import { UserMappingListComponent } from './user/user-mapping-list/user-mapping-list.component';
+import {UserService} from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { UserMappingListComponent } from './user/user-mapping-list/user-mapping-
     AppRoutingModule,
     Ng2SmartTableModule,
   ],
-  providers: [UniversityService, DataStorageService, RoleService],
+  providers: [DataStorageService, UniversityService, RoleService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

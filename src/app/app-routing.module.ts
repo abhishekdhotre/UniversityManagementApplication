@@ -6,6 +6,7 @@ import {UniversityEditComponent} from './university/university-edit/university-e
 import {UniversityStartComponent} from './university/university-start/university-start.component';
 import {SchoolEditComponent} from './university/school-edit/school-edit.component';
 import {RoleComponent} from './role/role.component';
+import {UserComponent} from './user/user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/university', pathMatch: 'full' },
@@ -19,6 +20,9 @@ const routes: Routes = [
   },
   { path: 'role', component: RoleComponent, children: [
       { path: ':id', component: RoleComponent },
+    ] },
+  { path: 'user', component: UserComponent, children: [
+      { path: ':id', component: UserComponent },
     ] }
   ];
 

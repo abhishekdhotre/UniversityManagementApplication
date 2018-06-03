@@ -1,3 +1,60 @@
-<p>
-  user-manage works!
-</p>
+<h3>Manage Role-University mapping</h3>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <button [disabled]="!formValid" class="btn btn-success" (click)="onMapClick()">Map</button>
+        <button [disabled]="!formValid" class="btn btn-danger" style="margin-right: 5px;" (click)="onDeleteClick()">Delete</button>
+      </div>
+    </div>
+    <label *ngIf="alreadyMapped" class="control-label" style="color: red;">User already mapped.</label>
+    <label *ngIf="!allowDelete" class="control-label" style="color: red;">User not mapped with Role.</label>
+    <br/>
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="dropdown">
+          <div class="btn-group" appDropdown>
+            <button
+              type="button"
+              class="btn btn-primary dropdown-toggle">
+              Select Role<span class="caret" style="margin-left: 20px"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li style="cursor: pointer"
+                  *ngFor="let role of roles">
+                <a (click)="onRoleSelected(role)">
+                  {{ role.name }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8">
+        <h5 *ngIf="roleSelected">Selected Role: {{ role.name }}</h5>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="dropdown">
+          <div class="btn-group" appDropdown>
+            <button
+              type="button"
+              class="btn btn-primary dropdown-toggle">
+              Select User<span class="caret" style="margin-left: 20px"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li style="cursor: pointer" *ngFor="let user of users">
+                <a (click)="onUserSelected(user)">{{ user.name }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8">
+        <h5 *ngIf="userSelected">Selected User: {{ user.name }}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
