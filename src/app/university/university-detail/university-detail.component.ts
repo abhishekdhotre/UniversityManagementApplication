@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {UniversityModel} from '../university.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {UniversityService} from '../university.service';
-import {DataStorageService} from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-university-detail',
@@ -35,7 +34,7 @@ export class UniversityDetailComponent implements OnInit {
   }
 
   onDeleteUniversity(universityModel: UniversityModel) {
-    this.universityService.deleteUniveristy(universityModel.id)
+    this.universityService.deleteUniveristy(universityModel.id);
     this.router.navigate(['/university']);
   }
 }

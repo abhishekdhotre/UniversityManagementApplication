@@ -12,129 +12,123 @@ import {RoleUserDto} from './role-user-dto';
 @Injectable()
 export class DataStorageService {
 
+  // apiUrlLocalhost = this.apiUrlAWS + ''
+  apiUrlAWS = 'http://universitymanagementservice-dev.us-east-2.elasticbeanstalk.com/api/';
   constructor(private httpClient: HttpClient) {  }
 
   // University, School and Department
   getUniversities() {
-    return this.httpClient.get<UniversityModel[]>('http://localhost:53447/api/university');
+    return this.httpClient.get<UniversityModel[]>(this.apiUrlAWS + 'university');
   }
 
   getUniversity(i) {
-    return this.httpClient.get<UniversityModel>('http://localhost:53447/api/university/' + i);
+    return this.httpClient.get<UniversityModel>(this.apiUrlAWS + 'university/' + i);
   }
 
   addUniversities(universityModel: UniversityModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post('http://localhost:53447/api/university'
+    return this.httpClient.post(this.apiUrlAWS + 'university'
       , universityModel, { headers });
   }
 
   updateUniversities(index: number, universityModel: UniversityModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.put('http://localhost:53447/api/university/' + index
+    return this.httpClient.put(this.apiUrlAWS + 'university/' + index
       , universityModel, { headers });
   }
 
   deleteUniversities(i) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.delete('http://localhost:53447/api/university/' + i, { headers });
+    return this.httpClient.delete(this.apiUrlAWS + 'university/' + i, { headers });
   }
 
   updateSchools(schoolId: number, schoolModel: SchoolModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.put('http://localhost:53447/api/school/' + schoolId
+    return this.httpClient.put(this.apiUrlAWS + 'school/' + schoolId
       , schoolModel, { headers });
   }
 
   // Roles
   getRoles() {
-    return this.httpClient.get<RoleModel[]>('http://localhost:53447/api/role');
-  }
-
-  getRole(i) {
-    return this.httpClient.get<RoleModel>('http://localhost:53447/api/role/' + i);
+    return this.httpClient.get<RoleModel[]>(this.apiUrlAWS + 'role');
   }
 
   addRole(roleModel: RoleModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post('http://localhost:53447/api/role'
+    return this.httpClient.post(this.apiUrlAWS + 'role'
       , roleModel, { headers });
   }
 
   updateRole(index: number, roleModel: RoleModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.put('http://localhost:53447/api/role/' + index
+    return this.httpClient.put(this.apiUrlAWS + 'role/' + index
       , roleModel, { headers });
   }
 
   deleteRole(i) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.delete('http://localhost:53447/api/role/' + i, { headers });
+    return this.httpClient.delete(this.apiUrlAWS + 'role/' + i, { headers });
   }
 
   addUniversityRole(universityRoleModel: UniversityRoleModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post('http://localhost:53447/api/universityrole'
+    return this.httpClient.post(this.apiUrlAWS + 'universityrole'
       , universityRoleModel, { headers });
   }
 
   deleteUniversityRole(universityRoleModel: UniversityRoleModel) {
-    return this.httpClient.delete('http://localhost:53447/api/universityrole/'
+    return this.httpClient.delete(this.apiUrlAWS + 'universityrole/'
       + universityRoleModel.universityId + '/' + universityRoleModel.roleId);
   }
 
   getUniversityRoleMapping() {
-    return this.httpClient.get<UniversityRoleDtoModel[]>('http://localhost:53447/api/universityrole');
+    return this.httpClient.get<UniversityRoleDtoModel[]>(this.apiUrlAWS + 'universityrole');
   }
 
   getSingleUniversityRoleMapping(universityRoleModel: UniversityRoleModel) {
-    return this.httpClient.get<UniversityRoleModel>('http://localhost:53447/api/universityrole/'
+    return this.httpClient.get<UniversityRoleModel>(this.apiUrlAWS + 'universityrole/'
       + universityRoleModel.universityId + '/' + universityRoleModel.roleId);
   }
 
   // Users
   getUsers() {
-    return this.httpClient.get<UserModel[]>('http://localhost:53447/api/user');
-  }
-
-  getUser(i) {
-    return this.httpClient.get<UserModel>('http://localhost:53447/api/user/' + i);
+    return this.httpClient.get<UserModel[]>(this.apiUrlAWS + 'user');
   }
 
   addUser(userModel: UserModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post('http://localhost:53447/api/user'
+    return this.httpClient.post(this.apiUrlAWS + 'user'
       , userModel, { headers });
   }
 
   updateUser(id: number, userModel: UserModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.put('http://localhost:53447/api/user/' + id
+    return this.httpClient.put(this.apiUrlAWS + 'user/' + id
       , userModel, { headers });
   }
 
   deleteUser(i) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.delete('http://localhost:53447/api/user/' + i, { headers });
+    return this.httpClient.delete(this.apiUrlAWS + 'user/' + i, { headers });
   }
 
   addRoleUser(roleUserModel: RoleUserModel) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post('http://localhost:53447/api/roleuser'
+    return this.httpClient.post(this.apiUrlAWS + 'roleuser'
       , roleUserModel, { headers });
   }
 
   deleteRoleUser(roleUserModel: RoleUserModel) {
-    return this.httpClient.delete('http://localhost:53447/api/roleuser/'
+    return this.httpClient.delete(this.apiUrlAWS + 'roleuser/'
       + roleUserModel.roleId + '/' + roleUserModel.userId);
   }
 
   getRoleUserMapping() {
-    return this.httpClient.get<RoleUserDto[]>('http://localhost:53447/api/roleuser');
+    return this.httpClient.get<RoleUserDto[]>(this.apiUrlAWS + 'roleuser');
   }
 
   getSingleRoleUserMapping(roleUserModel: RoleUserModel) {
-    return this.httpClient.get<RoleUserModel>('http://localhost:53447/api/roleuser/'
+    return this.httpClient.get<RoleUserModel>(this.apiUrlAWS + 'roleuser/'
       + roleUserModel.roleId + '/' + roleUserModel.userId);
   }
 }

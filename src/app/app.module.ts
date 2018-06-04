@@ -30,6 +30,9 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { UserManageComponent } from './user/user-manage/user-manage.component';
 import { UserMappingListComponent } from './user/user-mapping-list/user-mapping-list.component';
 import {UserService} from './user/user.service';
+import {MatSnackBarModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,7 @@ import {UserService} from './user/user.service';
     UserListComponent,
     UserManageComponent,
     UserMappingListComponent,
+    SnackBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,10 @@ import {UserService} from './user/user.service';
     HttpClientModule,
     AppRoutingModule,
     Ng2SmartTableModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
+  entryComponents: [SnackBarComponent],
   providers: [DataStorageService, UniversityService, RoleService, UserService],
   bootstrap: [AppComponent]
 })

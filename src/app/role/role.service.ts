@@ -4,13 +4,16 @@ import {DataStorageService} from '../shared/data-storage.service';
 import {Injectable} from '@angular/core';
 import {UniversityRoleModel} from '../shared/university-role.model';
 import {UniversityRoleDtoModel} from '../shared/university-role-dto.model';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class RoleService {
   roleUpdated = new Subject<RoleModel[]>();
   universityRoleMappingUpdated = new Subject<UniversityRoleDtoModel[]>();
   startedEditing = new Subject<number>();
-  constructor(private dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService,
+              private snackBar: MatSnackBar) { }
 
   private roles: RoleModel[];
   private universityRoleMapping: UniversityRoleDtoModel[];
@@ -25,39 +28,33 @@ export class RoleService {
       );
   }
 
-  getRole(id: number) {
-    return this.dataStorageService.getRole(id);
-  }
-
   getRoleModel(id: number) {
     return this.roles.find(function (obj) { return obj.id === id; });
   }
 
   addRole(roleModel: RoleModel) {
     return this.dataStorageService.addRole(roleModel).subscribe(
-      (response) => {
+      () => {
         this.getRoles();
+        this.openSnackBar('Role added successfully!');
       });
   }
 
   updateRole(index: number, roleModel: RoleModel) {
     return this.dataStorageService.updateRole(index, roleModel).subscribe(
-      (response) => {
+      () => {
         this.getRoles();
         this.getUniversityRolesMapping();
+        this.openSnackBar('Role updated successfully!');
       });
   }
 
   deleteRole(id) {
     return this.dataStorageService.deleteRole(id).subscribe(
-      (response) => {
+      () => {
         this.getRoles();
+        this.openSnackBar('Role deleted successfully!');
       });
-  }
-
-  setRoles(roleModels: RoleModel[]) {
-    this.roles = roleModels;
-    this.updateRoleList();
   }
 
   updateRoleList() {
@@ -66,15 +63,17 @@ export class RoleService {
 
   addUniversityRoleMapping(universityRole: UniversityRoleModel) {
     return this.dataStorageService.addUniversityRole(universityRole).subscribe(
-      (response) => {
+      () => {
         this.getUniversityRolesMapping();
+        this.openSnackBar('Added Mapping successfully!');
       });
   }
 
   deleteUniversityRoleMapping(universityRole: UniversityRoleModel) {
     return this.dataStorageService.deleteUniversityRole(universityRole).subscribe(
-      (response) => {
+      () => {
         this.getUniversityRolesMapping();
+        this.openSnackBar('Deleted mapping successfully!');
       });
   }
 
@@ -94,5 +93,11 @@ export class RoleService {
 
   updateUniversityRoleMapping() {
     this.universityRoleMappingUpdated.next(this.universityRoleMapping.slice());
+  }
+
+  openSnackBar(message) {
+    this.snackBar.openFromComponent(SnackBarComponent, {
+      duration: 1000, data: message
+    });
   }
 }

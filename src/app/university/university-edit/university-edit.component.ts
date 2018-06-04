@@ -12,6 +12,7 @@ export class UniversityEditComponent implements OnInit {
   id: number;
   editMode = false;
   universityForm: FormGroup;
+  get formData() { return <FormArray>this.universityForm.get('schools'); }
   constructor(private activeRoute: ActivatedRoute,
               private universityService: UniversityService,
               private router: Router) { }

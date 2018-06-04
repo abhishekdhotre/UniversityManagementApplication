@@ -4,12 +4,15 @@ import {UniversityModel} from './university.model';
 import {SchoolModel} from './school.model';
 import {Injectable} from '@angular/core';
 import {DataStorageService} from '../shared/data-storage.service';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class UniversityService {
   universityUpdated = new Subject<UniversityModel[]>();
 
-  constructor(private dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService,
+              private snackBar: MatSnackBar) { }
 
   private universities: UniversityModel[];
 
@@ -54,28 +57,26 @@ export class UniversityService {
 
   addUniversity(universityModel: UniversityModel) {
     return this.dataStorageService.addUniversities(universityModel).subscribe(
-      (response) => {
+      () => {
         this.getUniversities();
+        this.openSnackBar('University added successfully!');
       });
   }
 
   updateUniversity(index: number, universityModel: UniversityModel) {
     return this.dataStorageService.updateUniversities(index, universityModel).subscribe(
-      (response) => {
+      () => {
         this.getUniversities();
+        this.openSnackBar('University updated successfully!');
       });
   }
 
   deleteUniveristy(id) {
     return this.dataStorageService.deleteUniversities(id).subscribe(
-      (response) => {
+      () => {
         this.getUniversities();
+        this.openSnackBar('University delete successfully!');
       });
-  }
-
-  setUniversities(universityModels: UniversityModel[]) {
-    this.universities = universityModels;
-    this.updateUniversityList();
   }
 
   getSchool(universityId: number, schoolId: number) {
@@ -86,12 +87,19 @@ export class UniversityService {
 
   updateSchool(schoolId: number, schoolModel: SchoolModel) {
     return this.dataStorageService.updateSchools(schoolId, schoolModel).subscribe(
-      (response) => {
+      () => {
         this.getUniversities();
+        this.openSnackBar('School updated successfully!');
       });
   }
 
   updateUniversityList() {
     this.universityUpdated.next(this.universities.slice());
+  }
+
+  openSnackBar(message) {
+    this.snackBar.openFromComponent(SnackBarComponent, {
+      duration: 1000, data: message
+    });
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UniversityService} from '../university.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import index from '@angular/cli/lib/cli';
 
 @Component({
   selector: 'app-school-edit',
@@ -14,7 +13,7 @@ export class SchoolEditComponent implements OnInit {
   schoolId: number;
   Name: string;
   schoolForm: FormGroup;
-
+  get formData() { return <FormArray>this.schoolForm.get('departments'); }
   constructor(private activeRoute: ActivatedRoute,
               private universityService: UniversityService,
               private router: Router) { }

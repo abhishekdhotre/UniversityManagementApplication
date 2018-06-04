@@ -3,7 +3,6 @@ import {UniversityModel} from '../university.model';
 import {Subscription} from 'rxjs';
 import {UniversityService} from '../university.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DataStorageService} from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-university-list',

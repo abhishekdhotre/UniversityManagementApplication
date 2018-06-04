@@ -4,13 +4,16 @@ import {Injectable} from '@angular/core';
 import {UserModel} from './user.model';
 import {RoleUserDto} from '../shared/role-user-dto';
 import {RoleUserModel} from '../shared/role-user.model';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class UserService {
   userUpdated = new Subject<UserModel[]>();
   roleUserMappingUpdated = new Subject<RoleUserDto[]>();
   startedEditing = new Subject<number>();
-  constructor(private dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService,
+              private snackBar: MatSnackBar) { }
 
   private users: UserModel[];
   private roleUserMapping: RoleUserDto[];
@@ -25,39 +28,33 @@ export class UserService {
       );
   }
 
-  getUser(id: number) {
-    return this.dataStorageService.getUser(id);
-  }
-
   getUserModel(id: number) {
     return this.users.find(function (obj) { return obj.id === id; });
   }
 
   addUser(userModel: UserModel) {
     return this.dataStorageService.addUser(userModel).subscribe(
-      (response) => {
+      () => {
         this.getUsers();
+        this.openSnackBar('Added User successfully!');
       });
   }
 
   updateUser(index: number, userModel: UserModel) {
     return this.dataStorageService.updateUser(index, userModel).subscribe(
-      (response) => {
+      () => {
         this.getUsers();
         this.getRoleUsersMapping();
+        this.openSnackBar('Updated User successfully!');
       });
   }
 
   deleteUser(id) {
     return this.dataStorageService.deleteUser(id).subscribe(
-      (response) => {
+      () => {
         this.getUsers();
+        this.openSnackBar('Deleted User successfully!');
       });
-  }
-
-  setUsers(userModel: UserModel[]) {
-    this.users = userModel;
-    this.updateUserList();
   }
 
   updateUserList() {
@@ -66,15 +63,17 @@ export class UserService {
 
   addRoleUserMapping(roleUser: RoleUserModel) {
     return this.dataStorageService.addRoleUser(roleUser).subscribe(
-      (response) => {
+      () => {
         this.getRoleUsersMapping();
+        this.openSnackBar('Added mapping successfully!');
       });
   }
 
   deleteRoleUsersMapping(roleUser: RoleUserModel) {
     return this.dataStorageService.deleteRoleUser(roleUser).subscribe(
-      (response) => {
+      () => {
         this.getRoleUsersMapping();
+        this.openSnackBar('Deleted mapping successfully!');
       });
   }
 
@@ -94,5 +93,11 @@ export class UserService {
 
   updateRoleUserMapping() {
     this.roleUserMappingUpdated.next(this.roleUserMapping.slice());
+  }
+
+  openSnackBar(message) {
+    this.snackBar.openFromComponent(SnackBarComponent, {
+      duration: 1000, data: message
+    });
   }
 }
