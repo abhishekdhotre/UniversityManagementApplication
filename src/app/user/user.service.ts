@@ -53,6 +53,7 @@ export class UserService {
     return this.dataStorageService.deleteUser(id).subscribe(
       () => {
         this.getUsers();
+        this.getRoleUsersMapping();
         this.openSnackBar('Deleted User successfully!');
       });
   }

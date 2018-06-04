@@ -53,6 +53,7 @@ export class RoleService {
     return this.dataStorageService.deleteRole(id).subscribe(
       () => {
         this.getRoles();
+        this.getUniversityRolesMapping();
         this.openSnackBar('Role deleted successfully!');
       });
   }

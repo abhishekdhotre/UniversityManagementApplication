@@ -1,11 +1,19 @@
-<div class="navbar">
+<div class="navbar" *ngIf="!showProgressSpinner">
   <app-header></app-header>
 </div>
 <br/>
-<div class="container">
+<div class="container" *ngIf="!showProgressSpinner">
   <div class="row">
     <div class="col-md-12">
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
+<div style="left: 45%; top: 40%; position: absolute">
+  <mat-progress-spinner
+    *ngIf="showProgressSpinner"
+    [color]="color"
+    [mode]="mode">
+  </mat-progress-spinner>
+</div>
+

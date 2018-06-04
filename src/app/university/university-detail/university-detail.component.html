@@ -1,8 +1,9 @@
 <div class="row">
-  <div class="col-xs-4">
-    <img src="{{ university.imagePath }}" alt="" class="img-responsive" style="max-height: 150px; max-width: 150px">
+  <div class="col-xs-3">
+    <img src="{{ university.imagePath }}"
+         alt="" class="img-responsive">
   </div>
-  <div class="col-xs-8">
+  <div class="col-xs-9 pull-left">
     <h1>{{ university.name }}</h1>
   </div>
 </div>
@@ -25,23 +26,27 @@
 <br/>
 <div class="row">
   <div class="col-xs-12">
-    {{ university.description }}
+    <mat-card>
+      <mat-card-content>
+        {{ university.description }}
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
 <br/>
 <div class="row">
   <div class="col-xs-12">
-    <ul class="list-group">
-      <li class="list-group-item"
+    <mat-card>
+      <mat-card-title
           *ngFor="let s of university.schools; let i = index;">
         {{ s.name }}
-        <ul class="list-group">
-          <li class="list-group-item"
+        <mat-card-subtitle>
+          <mat-card-content
               *ngFor="let d of university.schools[i].departments">
-              {{ d.name }}
-          </li>
-        </ul>
-      </li>
-    </ul>
+            {{ d.name }}
+          </mat-card-content>
+        </mat-card-subtitle>
+      </mat-card-title>
+    </mat-card>
   </div>
 </div>
