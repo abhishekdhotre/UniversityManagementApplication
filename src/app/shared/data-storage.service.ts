@@ -12,7 +12,7 @@ import {RoleUserDto} from './role-user-dto';
 @Injectable()
 export class DataStorageService {
 
-  // apiUrlLocalhost = this.apiUrlAWS + ''
+  // apiUrlLocalhost = 'http://localhost:53447/api/'
   apiUrlAWS = 'http://universitymanagementservice-dev.us-east-2.elasticbeanstalk.com/api/';
   constructor(private httpClient: HttpClient) {  }
 
